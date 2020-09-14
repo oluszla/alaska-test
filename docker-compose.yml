@@ -1,0 +1,7 @@
+version: '2'
+services:
+  alaska:
+    image: azshoo/alaska:1.0
+    container_name: alaska
+    ports:
+    - '8091:8091'
