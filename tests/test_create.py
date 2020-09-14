@@ -20,16 +20,17 @@ test_data = [
 def test_create_bear(bear_type: str, bear_name: str, bear_age: float):
     bear_id = create_bear(bear_type, bear_name, bear_age)
     bear = get_bear_by_id(bear_id)
-    assert bear['bear_type'] == bear_type
-    assert bear['bear_name'] == str(bear_name).upper()  # why does service make names upper?
-    assert bear['bear_age'] == bear_age
+    assert bear, 'Bear does not exist'
+    assert bear['bear_type'] == bear_type, 'Bear type is wrong'
+    assert bear['bear_name'] == str(bear_name).upper(), 'Bear name is wrong'  # why does service make names upper?
+    assert bear['bear_age'] == bear_age, 'Bear age is wrong'
 
 
 @pytest.mark.parametrize('bear_age', [-1, 100.1])
 def test_create_age(bear_age):
     bear_id = create_bear('POLAR', 'test', bear_age)
     bear = get_bear_by_id(bear_id)
-    assert bear['bear_age'] == 0.0  # why 0.0?
+    assert bear['bear_age'] == 0.0, 'Bear age is wrong'  # why 0.0?
 
 
 def test_create_wrong_bear_type():
